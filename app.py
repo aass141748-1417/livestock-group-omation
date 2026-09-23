@@ -1,7 +1,7 @@
 import csv
 from pathlib import Path
 
-GROUP_LINK = "ضع_رابط_القروب_هنا"
+GROUP_LINK = "https://chat.whatsapp.com/LIEGIoWWBNLFfARCZYVGWC"
 
 FIELDS = [
     "name",
