@@ -1,0 +1,22 @@
+name: Livestock Group Automation
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */6 * * *"
+
+jobs:
+  run-automation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: تحميل المشروع
+        uses: actions/checkout@v4
+
+      - name: تشغيل Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: تشغيل النظام
+        run: python app.py
