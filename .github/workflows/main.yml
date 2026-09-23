@@ -22,7 +22,9 @@ jobs:
           python-version: "3.12"
 
       - name: تثبيت المتطلبات
-        run: pip install requests feedparser
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: البحث عن المهتمين بالمواشي
         run: python discover.py
