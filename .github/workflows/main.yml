@@ -5,18 +5,32 @@ on:
   schedule:
     - cron: "0 */6 * * *"
 
+permissions:
+  contents: write
+
 jobs:
-  run-automation:
+  discover:
     runs-on: ubuntu-latest
 
     steps:
       - name: تحميل المشروع
         uses: actions/checkout@v4
 
-      - name: تشغيل Python
+      - name: إعداد Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: تشغيل النظام
-        run: python app.py
+      - name: تثبيت المتطلبات
+        run: pip install requests feedparser
+
+      - name: البحث عن المهتمين بالمواشي
+        run: python discover.py
+
+      - name: حفظ النتائج
+        run: |
+          git config user.name "livestock-automation"
+          git config user.email "actions@github.com"
+          git add leads.csv
+          git diff --cached --quiet || git commit -m "Update livestock leads"
+          git push
